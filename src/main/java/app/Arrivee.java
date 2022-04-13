@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Arrivee {
+	private static final long Invalid =-1;
 	private static int numeroSortie = 0;
 	private int numeroArrivee;
 
@@ -19,7 +20,7 @@ public class Arrivee {
 	}
 
 	private long horaireArrivee;
-	private Calendar hDep;
+	private long horaireDepart;
 
 	private Complexe complexe;
 
@@ -27,7 +28,7 @@ public class Arrivee {
 		this.horaireArrivee = Calendar.getInstance().getTimeInMillis();
 		this.choixSport = choixSport;
 		this.complexe = complexe;
-		this.hDep = null;
+		this.horaireDepart = Invalid;
 	}
 
 	public String afficheBillet() {
@@ -63,12 +64,11 @@ public class Arrivee {
 		leTicket = MSGNOM + this.getComplexe().getNomComplexe() + "\t";
 		leTicket += MSGNUM + ++Arrivee.numeroSortie + "\n";
 
-		this.hDep = Calendar.getInstance();
-		
-		//on simule ici une sortie 32 mn plus tard
-		hDep.add(Calendar.MINUTE, +2);
-		
-		Date laDate = hDep.getTime();
+		Calendar heureDeDepart = Calendar.getInstance();
+
+		heureDeDepart.setTimeInMillis(horaireDepart);
+
+		Date laDate = heureDeDepart.getTime();
 		SimpleDateFormat leJour = new SimpleDateFormat("dd/MM/yyyy");
 		leTicket += MSGDATE + leJour.format(laDate) + "\n";
 		SimpleDateFormat lHeure = new SimpleDateFormat("HH:mm");
@@ -81,31 +81,30 @@ public class Arrivee {
 	public double getMontant() {
 		double cout = 0;
 
-		if (hDep != null) {
+		if (horaireDepart != Invalid) {
 			// on passe des ms en mn
-			long dep = hDep.getTimeInMillis() / (1000 * 60);
-			long arr = this.horaireArrivee / (1000 * 60);
-			long duree =  dep - arr;
-			
-
+			long duree = (horaireDepart - horaireArrivee)/(1000 * 60);
+			//
 			if (duree <= 30 && duree > 15) {
 				cout = 0.5;
-			} else {
-				if (duree < 60) {
-					cout = 1;
-				} else {
-					// cout fixe d'une heure
-					cout = 1;
-					duree -= 60;
-					// + tous les 1/4 h commencés
-					long nbquarts, reste;
-					nbquarts = duree / 15;
-					reste = duree % 15;
-					if (reste != 0)
-						nbquarts++;
-					cout += nbquarts * 0.5;
-				}
+			}
 
+			if (duree > 30 && duree <=60) {
+				cout = 1;
+			}
+
+			if (duree >60){
+				// cout fixe d'une heure
+				cout = 1;
+				duree -= 60;
+				// + tous les 1/4 h commencés
+				long nbquarts, reste;
+				nbquarts = duree / 15;
+
+				if (nbquarts * 15 != duree){
+					nbquarts++;
+				}
+				cout += nbquarts * 0.5;
 			}
 		}
 		return cout;
@@ -117,5 +116,13 @@ public class Arrivee {
 
 	public void setNumeroArrivee(int numero) {
 		numeroArrivee = numero;
+	}
+
+	public void setHoraireArrivee(long timeInMs) {
+		horaireArrivee = timeInMs;
+	}
+
+	public void setHoraireDepart(long timeInMs) {
+		horaireDepart = timeInMs;
 	}
 }
