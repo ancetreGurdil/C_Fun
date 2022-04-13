@@ -17,7 +17,6 @@ public class getMontantTest {
         arrivee = new Arrivee(complexe,'M');
     }
 
-
     @Test
     public void ShouldPayFor16Minutes() {
 
