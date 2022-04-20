@@ -33,6 +33,6 @@ public class RunComplexe {
 			System.out.print(leComplexe.lesInfos());
 			repAutre = Character.toUpperCase(javax.swing.JOptionPane.showInputDialog(AUTRE).charAt(0));
 		}
-		System.exit(0);	
+		System.exit(0);
 	}
 }
