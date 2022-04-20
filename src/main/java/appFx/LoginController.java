@@ -3,7 +3,10 @@ package appFx;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -12,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.stage.StageStyle;
 
 import javax.swing.plaf.nimbus.State;
 import java.io.File;
@@ -70,7 +74,6 @@ public class LoginController implements Initializable {
         Connection_bd connectNow = new Connection_bd();
         Connection connectDb = connectNow.getConnection();
 
-
         String verifyLogin = "SELECT COUNT(1) FROM compte WHERE pseudonyme = '" + identifiant.getText() + "' AND motDePasse ='" + motdepasse.getText() +"'";
 
         try {
@@ -80,6 +83,7 @@ public class LoginController implements Initializable {
             while(queryResult.next()){
                 if (queryResult.getInt(1)==1){
                     messageLabel.setText("felicitation");
+                    createAccountForm();
                 }else{
                     messageLabel.setText("erreur impossible de se connecter,essaye encore");
                 }
@@ -91,6 +95,24 @@ public class LoginController implements Initializable {
         }
     }
 
+
+    public void createAccountForm(){
+        try{
+            Stage stage = (Stage) annuler.getScene().getWindow();
+            stage.close();
+            URL url = new File("src/main/resources/app/enregistrement.fxml").toURI().toURL();
+            Parent root = FXMLLoader.load(url);
+            Stage registerStage = new Stage();
+            registerStage.initStyle(StageStyle.UNDECORATED);
+            registerStage.setScene(new Scene(root,600,400));
+            registerStage.show();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
 
 
 }
