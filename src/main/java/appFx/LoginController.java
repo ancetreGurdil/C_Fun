@@ -50,7 +50,7 @@ public class LoginController implements Initializable {
 
         File muscuFile = new File("src/main/resources/app/muscu.png");
         Image muscuImage = new Image(muscuFile.toURI().toString());
-        muscuImageView.setImage(boxeImage);
+        muscuImageView.setImage(muscuImage);
 
         File veloFile = new File("src/main/resources/app/velo.png");
         Image veloImage = new Image(veloFile.toURI().toString());
@@ -83,7 +83,7 @@ public class LoginController implements Initializable {
             while(queryResult.next()){
                 if (queryResult.getInt(1)==1){
                     messageLabel.setText("felicitation");
-                    createAccountForm();
+                    choixSport();
                 }else{
                     messageLabel.setText("erreur impossible de se connecter,essaye encore");
                 }
@@ -101,6 +101,24 @@ public class LoginController implements Initializable {
             Stage stage = (Stage) annuler.getScene().getWindow();
             stage.close();
             URL url = new File("src/main/resources/app/enregistrement.fxml").toURI().toURL();
+            Parent root = FXMLLoader.load(url);
+            Stage registerStage = new Stage();
+            registerStage.initStyle(StageStyle.UNDECORATED);
+            registerStage.setScene(new Scene(root,600,400));
+            registerStage.show();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+
+    public void choixSport(){
+        try{
+            Stage stage = (Stage) annuler.getScene().getWindow();
+            stage.close();
+            URL url = new File("src/main/resources/app/choixSport.fxml").toURI().toURL();
             Parent root = FXMLLoader.load(url);
             Stage registerStage = new Stage();
             registerStage.initStyle(StageStyle.UNDECORATED);

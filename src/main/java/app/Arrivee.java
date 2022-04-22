@@ -1,13 +1,17 @@
 package app;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class Arrivee {
 	private static final long Invalid =-1;
 	private static int numeroSortie = 0;
 	private int numeroArrivee;
+
 
 	public int getNumeroArrivee() {
 		return numeroArrivee;
@@ -64,15 +68,19 @@ public class Arrivee {
 		leTicket = MSGNOM + this.getComplexe().getNomComplexe() + "\t";
 		leTicket += MSGNUM + ++Arrivee.numeroSortie + "\n";
 
-		Calendar heureDeDepart = Calendar.getInstance();
 
+		Calendar heureDeDepart = Calendar.getInstance();
 		heureDeDepart.setTimeInMillis(horaireDepart);
 
 		Date laDate = heureDeDepart.getTime();
+
+		long millis = Instant.now().toEpochMilli();
+
+
 		SimpleDateFormat leJour = new SimpleDateFormat("dd/MM/yyyy");
-		leTicket += MSGDATE + leJour.format(laDate) + "\n";
+		leTicket += MSGDATE + leJour.format(millis) + "\n";
 		SimpleDateFormat lHeure = new SimpleDateFormat("HH:mm");
-		leTicket += MSGHEURE + lHeure.format(laDate) + "\n";
+		leTicket += MSGHEURE + lHeure.format(millis) + "\n";
 		leTicket += MSGCOUT + this.getMontant() + " €\n";
 
 		return leTicket;
@@ -117,6 +125,7 @@ public class Arrivee {
 	public void setNumeroArrivee(int numero) {
 		numeroArrivee = numero;
 	}
+
 
 	public void setHoraireArrivee(long timeInMs) {
 		horaireArrivee = timeInMs;

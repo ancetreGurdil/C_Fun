@@ -8,15 +8,16 @@ public class RunComplexe {
 	private static final String SORTIE = "N° d'entrée à sortir : ";
 	private static final String CHOIX = "(M)usculation, (F)itness : ";
 	private static final String AUTRE = "Autre opération (O/N) : ";
+
 	
 	public static void main(String[] args) {
 		Complexe leComplexe = new Complexe(nbMuscu, nbFit, nomComplexe);
-		
+
 		char repAutre = 'O';
 		char repType;
 		int repSortie;
 		char repChoix;
-		
+
 		while (repAutre == 'O') {
 			repType = Character.toUpperCase(javax.swing.JOptionPane.showInputDialog(TYPE).charAt(0));
 			if (repType == 'E') {

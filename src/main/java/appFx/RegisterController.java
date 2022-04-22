@@ -53,7 +53,6 @@ public class RegisterController implements Initializable {
         Image formulaireImage1 = new Image(formulaireFile1.toURI().toString());
         formulaireImageView1.setImage(formulaireImage1);
     }
-
     public void registerButtonOnAction(){
         if (motDePasseLabel.getText().equals(confirmLabel.getText())) {
             registerUser();
@@ -103,5 +102,6 @@ public class RegisterController implements Initializable {
             e.getCause();
         }
     }
+
 
 }
