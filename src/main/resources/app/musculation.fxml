@@ -1,14 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="app.Musculation"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #434B4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appFx.MusculationController">
+   <children>
+      <AnchorPane prefHeight="65.0" prefWidth="605.0" style="-fx-background-color: eb9d00;">
+         <children>
+            <Label alignment="CENTER" layoutX="75.0" layoutY="10.0" prefHeight="16.0" prefWidth="450.0" text="Musculation" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="33.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="altereImageView" fitHeight="60.0" fitWidth="70.0" layoutX="55.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@altere.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="altereImageView1" fitHeight="60.0" fitWidth="70.0" layoutX="480.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@altere.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Label alignment="CENTER" layoutX="50.0" layoutY="92.0" prefHeight="24.0" prefWidth="177.0" style="-fx-border-color: eb9d00;" text="Numéro billet" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="50.0" layoutY="138.0" prefHeight="27.0" prefWidth="117.0" style="-fx-border-color: eb9d00;" text="Date" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="303.0" layoutY="138.0" prefHeight="27.0" prefWidth="124.0" style="-fx-border-color: eb9d00;" text="Heure" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="50.0" layoutY="299.0" prefHeight="24.0" prefWidth="177.0" style="-fx-border-color: eb9d00;" text="Taux occupation" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="91.0" layoutY="213.0" prefHeight="27.0" prefWidth="177.0" style="-fx-border-color: eb9d00;" text="Place Disponible" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="91.0" layoutY="255.0" prefHeight="27.0" prefWidth="177.0" style="-fx-border-color: eb9d00;" text="Place Occupé" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="NUM_BILLET" editable="false" layoutX="253.0" layoutY="93.0" prefHeight="25.0" prefWidth="124.0" />
+      <TextField fx:id="DATE" alignment="CENTER" editable="false" layoutX="189.0" layoutY="139.0" prefHeight="25.0" prefWidth="101.0" />
+      <TextField fx:id="HEURE" alignment="CENTER" editable="false" layoutX="438.0" layoutY="140.0" prefHeight="25.0" prefWidth="101.0" />
+      <TextField fx:id="PLACE_LIBRE" alignment="CENTER" editable="false" layoutX="290.0" layoutY="214.0" prefHeight="25.0" prefWidth="162.0" />
+      <TextField fx:id="PLACE_OCCUPE" alignment="CENTER" editable="false" layoutX="290.0" layoutY="256.0" prefHeight="25.0" prefWidth="162.0" />
+      <TextField fx:id="TAUX_OCCUPE" alignment="CENTER" editable="false" layoutX="253.0" layoutY="300.0" prefHeight="25.0" prefWidth="101.0" />
+      <Button fx:id="retour" layoutX="343.0" layoutY="354.0" mnemonicParsing="false" onAction="#retourMenu" prefHeight="24.0" prefWidth="219.0" style="-fx-background-color: #eb9d00;" text="Retour" />
+      <Button fx:id="confirmer" layoutX="58.0" layoutY="354.0" mnemonicParsing="false" onAction="#Confirmation" prefHeight="24.0" prefWidth="219.0" style="-fx-background-color: #eb9d00;" text="Confirmer" />
+   </children>
 </AnchorPane>
