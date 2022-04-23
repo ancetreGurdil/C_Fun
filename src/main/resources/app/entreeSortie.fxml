@@ -8,38 +8,38 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appFx.ChoixSportController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appFx.EntreeSortieController">
     <children>
         <BorderPane prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #434B4D;" />
         <BorderPane layoutX="300.0" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #434B4D;" />
         <AnchorPane layoutX="46.0" layoutY="100.0" prefHeight="200.0" prefWidth="232.0" style="-fx-background-color: eb9d00;">
             <children>
-                <ImageView fx:id="altereImageView" fitHeight="150.0" fitWidth="200.0" layoutX="41.0" layoutY="25.0" onMouseClicked="#retourLogin" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="entreeImageView" fitHeight="150.0" fitWidth="200.0" layoutX="41.0" layoutY="25.0" onMouseClicked="#retourLogin" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@altere.png" />
+                        <Image url="@entree.png" />
                     </image>
                 </ImageView>
-                <Button fx:id="muscu" mnemonicParsing="false" onAction="#MusculationController" opacity="0.0" prefHeight="200.0" prefWidth="232.0" text="Button" />
+                <Button fx:id="entree" mnemonicParsing="false" onAction="#choixSport" opacity="0.0" prefHeight="200.0" prefWidth="232.0" text="Button" />
             </children>
         </AnchorPane>
-        <Label layoutX="110.0" layoutY="45.0" text="Musculation" textFill="WHITE">
+        <Label layoutX="125.0" layoutY="45.0" text="Entree" textFill="WHITE">
             <font>
                 <Font size="19.0" />
             </font>
         </Label>
-        <Label layoutX="400.0" layoutY="45.0" text="Fitness" textFill="WHITE">
+        <Label layoutX="415.0" layoutY="45.0" text="Sortie" textFill="WHITE">
             <font>
                 <Font size="19.0" />
             </font>
         </Label>
         <AnchorPane layoutX="320.0" layoutY="100.0" prefHeight="200.0" prefWidth="232.0" style="-fx-background-color: eb9d00;">
             <children>
-                <ImageView fx:id="fitnessImageView" fitHeight="150.0" fitWidth="200.0" layoutX="48.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="sortieImageView" fitHeight="150.0" fitWidth="200.0" layoutX="48.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@fitness.png" />
+                        <Image url="@sortie.png" />
                     </image>
                 </ImageView>
-            <Button fx:id="fitness" mnemonicParsing="false" onAction="#goOnFitness" opacity="0.0" prefHeight="200.0" prefWidth="232.0" text="Button" />
+                <Button fx:id="fitness" mnemonicParsing="false" opacity="0.0" prefHeight="200.0" prefWidth="232.0" text="Button" />
             </children>
         </AnchorPane>
         <Button fx:id="retour" layoutX="174.0" layoutY="350.0" mnemonicParsing="false" onAction="#retourLogin" prefHeight="24.0" prefWidth="241.0" style="-fx-background-color: Eb9d00;" text="Retour" />

@@ -83,7 +83,7 @@ public class LoginController implements Initializable {
             while(queryResult.next()){
                 if (queryResult.getInt(1)==1){
                     messageLabel.setText("felicitation");
-                    choixSport();
+                    entreSortie();
                 }else{
                     messageLabel.setText("erreur impossible de se connecter,essaye encore");
                 }
@@ -114,11 +114,11 @@ public class LoginController implements Initializable {
         }
     }
 
-    public void choixSport(){
+    public void entreSortie(){
         try{
             Stage stage = (Stage) annuler.getScene().getWindow();
             stage.close();
-            URL url = new File("src/main/resources/app/choixSport.fxml").toURI().toURL();
+            URL url = new File("src/main/resources/app/entreeSortie.fxml").toURI().toURL();
             Parent root = FXMLLoader.load(url);
             Stage registerStage = new Stage();
             registerStage.initStyle(StageStyle.UNDECORATED);
@@ -131,7 +131,5 @@ public class LoginController implements Initializable {
             e.getCause();
         }
     }
-
-
 }
 

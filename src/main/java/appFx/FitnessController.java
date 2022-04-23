@@ -28,6 +28,8 @@ public class FitnessController implements Initializable {
     @FXML
     private ImageView fitnessImageView;
     @FXML
+    private ImageView fitnessImageView1;
+    @FXML
     private TextField NUM_BILLET;
     @FXML
     private TextField DATE;
@@ -38,24 +40,37 @@ public class FitnessController implements Initializable {
     @FXML
     private TextField PLACE_OCCUPE;
     @FXML
+    private TextField TAUX_OCCUPE;
+    @FXML
     private Button retour;
+
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        File altereFile = new File("src/main/resources/app/fitness.png");
-        Image altereImage = new Image(altereFile.toURI().toString());
-        fitnessImageView.setImage(altereImage);
+        File fitnessFile = new File("src/main/resources/app/fitness.png");
+        Image fitnessImage = new Image(fitnessFile.toURI().toString());
+        fitnessImageView.setImage(fitnessImage);
+
+        File fitnessFile1 = new File("src/main/resources/app/fitness.png");
+        Image fitnessImage1 = new Image(fitnessFile1.toURI().toString());
+        fitnessImageView1.setImage(fitnessImage1);
 
         getNUM_BILLET();
         getDATE();
         getHEURE();
         getNbPlacesRestantesFit();
         getPLACE_OCCUPE();
+        getTAUX_OCCUPE();
 
     }
+
+
     Arrivee arrivee = new Arrivee(null,'F');
     Complexe complexe = new Complexe(5,4,"Cfun");
+
+
+
     public TextField getNUM_BILLET() {
 
         arrivee.getNumeroArrivee();
@@ -103,6 +118,11 @@ public class FitnessController implements Initializable {
             e.printStackTrace();
             e.getCause();
         }
+    }
+    public TextField getTAUX_OCCUPE(){
+        double TauxOccupe = complexe.etatMuscu();
+        TAUX_OCCUPE.setText(""+TauxOccupe+"");
+        return TAUX_OCCUPE;
     }
 
 

@@ -40,7 +40,7 @@ public class MusculationController implements Initializable {
 	@FXML
     private TextField TAUX_OCCUPE;
     @FXML
-    private Button Autre_Operation;
+    private Button retour;
 
 
     @Override
@@ -58,7 +58,7 @@ public class MusculationController implements Initializable {
     
     public void retourMenu(){
         try {
-            Stage stage = (Stage) Autre_Operation.getScene().getWindow();
+            Stage stage = (Stage) retour.getScene().getWindow();
             stage.close();
             URL url = new File("src/main/resources/app/choixSport.fxml").toURI().toURL();
             Parent root = FXMLLoader.load(url);
@@ -75,7 +75,7 @@ public class MusculationController implements Initializable {
     
     public void Confirmation(){
         try {
-            Stage stage = (Stage) Autre_Operation.getScene().getWindow();
+            Stage stage = (Stage) retour.getScene().getWindow();
             stage.close();
             URL url = new File("src/main/resources/app/choixSport.fxml").toURI().toURL();
             Parent root = FXMLLoader.load(url);

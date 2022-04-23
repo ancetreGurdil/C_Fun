@@ -15,48 +15,24 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ChoixSportController implements Initializable {
-	
-	@FXML
-    private Button muscu;
+public class EntreeSortieController implements Initializable {
     @FXML
-    private Button fitness;
+    private ImageView entreeImageView;
     @FXML
-    private ImageView altereImageView;
-    @FXML
-    private ImageView fitnessImageView;
-
+    private ImageView sortieImageView;
     @FXML
     private Button retour;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        File altereFile = new File("src/main/resources/app/altere.png");
-        Image altereImage = new Image(altereFile.toURI().toString());
-        altereImageView.setImage(altereImage);
+        File entreeFile = new File("src/main/resources/app/entree.png");
+        Image entreeImage = new Image(entreeFile.toURI().toString());
+        entreeImageView.setImage(entreeImage);
 
-        File fitnessFile = new File("src/main/resources/app/fitness.png");
-        Image fitnessImage = new Image(fitnessFile.toURI().toString());
-        fitnessImageView.setImage(fitnessImage);
-    }
-    
-    public void MusculationController(){
-        try{
-            Stage stage = (Stage) muscu.getScene().getWindow();
-            stage.close();
-            URL url = new File("src/main/resources/app/musculation.fxml").toURI().toURL();
-            Parent root = FXMLLoader.load(url);
-            Stage registerStage = new Stage();
-            registerStage.initStyle(StageStyle.UNDECORATED);
-            registerStage.setScene(new Scene(root,600,400));
-            registerStage.show();
-
-
-        }catch (Exception e){
-            e.printStackTrace();
-            e.getCause();
-        }
+        File sortieFile = new File("src/main/resources/app/sortie.png");
+        Image sortieImage = new Image(sortieFile.toURI().toString());
+        sortieImageView.setImage(sortieImage);
     }
 
     public void retourLogin(){
@@ -75,11 +51,12 @@ public class ChoixSportController implements Initializable {
             e.getCause();
         }
     }
-    public void goOnFitness(){
+
+    public void choixSport(){
         try{
-            Stage stage = (Stage) fitness.getScene().getWindow();
+            Stage stage = (Stage) retour.getScene().getWindow();
             stage.close();
-            URL url = new File("src/main/resources/app/fitness.fxml").toURI().toURL();
+            URL url = new File("src/main/resources/app/choixSport.fxml").toURI().toURL();
             Parent root = FXMLLoader.load(url);
             Stage registerStage = new Stage();
             registerStage.initStyle(StageStyle.UNDECORATED);
@@ -92,5 +69,4 @@ public class ChoixSportController implements Initializable {
             e.getCause();
         }
     }
-
 }
