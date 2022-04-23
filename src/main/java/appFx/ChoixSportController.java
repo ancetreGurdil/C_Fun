@@ -16,7 +16,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ChoixSportController implements Initializable {
-
+	
+	@FXML
+    private Button muscu;
     @FXML
     private ImageView altereImageView;
     @FXML
@@ -34,6 +36,24 @@ public class ChoixSportController implements Initializable {
         File fitnessFile = new File("src/main/resources/app/fitness.png");
         Image fitnessImage = new Image(fitnessFile.toURI().toString());
         fitnessImageView.setImage(fitnessImage);
+    }
+    
+    public void MusculationController(){
+        try{
+            Stage stage = (Stage) muscu.getScene().getWindow();
+            stage.close();
+            URL url = new File("src/main/resources/app/musculation.fxml").toURI().toURL();
+            Parent root = FXMLLoader.load(url);
+            Stage registerStage = new Stage();
+            registerStage.initStyle(StageStyle.UNDECORATED);
+            registerStage.setScene(new Scene(root,600,400));
+            registerStage.show();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
     }
 
     public void retourLogin(){

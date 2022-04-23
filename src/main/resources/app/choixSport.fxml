@@ -14,11 +14,12 @@
       <BorderPane layoutX="300.0" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #434B4D;" />
       <AnchorPane layoutX="46.0" layoutY="100.0" prefHeight="200.0" prefWidth="232.0" style="-fx-background-color: eb9d00;">
          <children>
-            <ImageView fx:id="altereImageView" fitHeight="150.0" fitWidth="200.0" layoutX="41.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="altereImageView" fitHeight="150.0" fitWidth="200.0" layoutX="41.0" layoutY="25.0" onMouseClicked="#retourLogin" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@altere.png" />
                </image>
             </ImageView>
+            <Button fx:id="muscu" mnemonicParsing="false" onAction="#MusculationController" opacity="0.0" prefHeight="200.0" prefWidth="232.0" text="Button" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="320.0" layoutY="100.0" prefHeight="200.0" prefWidth="232.0" style="-fx-background-color: eb9d00;">
