@@ -52,5 +52,22 @@ public class ChoixSportController implements Initializable {
             e.getCause();
         }
     }
+    public void goOnFitness(){
+        try{
+            Stage stage = (Stage) retour.getScene().getWindow();
+            stage.close();
+            URL url = new File("src/main/resources/app/fitness.fxml").toURI().toURL();
+            Parent root = FXMLLoader.load(url);
+            Stage registerStage = new Stage();
+            registerStage.initStyle(StageStyle.UNDECORATED);
+            registerStage.setScene(new Scene(root,600,400));
+            registerStage.show();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
 
 }

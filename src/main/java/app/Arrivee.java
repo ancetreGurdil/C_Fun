@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+
 public class Arrivee {
 	private static final long Invalid =-1;
 	private static int numeroSortie = 0;
@@ -118,6 +119,8 @@ public class Arrivee {
 		return cout;
 	}
 
+
+
 	public Complexe getComplexe() {
 		return this.complexe;
 	}
@@ -129,6 +132,10 @@ public class Arrivee {
 
 	public void setHoraireArrivee(long timeInMs) {
 		horaireArrivee = timeInMs;
+	}
+
+	public long getHoraireArrivee() {
+		return horaireArrivee;
 	}
 
 	public void setHoraireDepart(long timeInMs) {

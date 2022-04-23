@@ -1,6 +1,12 @@
 package app;
 
-public class RunComplexe {
+import com.keepautomation.barcode.BarCode;
+import com.keepautomation.barcode.IBarCode;
+
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+
+public class  RunComplexe {
 	private static int nbMuscu = 4;
 	private static int nbFit = 5;
 	private static final String nomComplexe = "C Fun";
@@ -24,6 +30,39 @@ public class RunComplexe {
 				repChoix = Character.toUpperCase(javax.swing.JOptionPane.showInputDialog(CHOIX).charAt(0));
 				Arrivee jArrive = new Arrivee(leComplexe, repChoix);
 				if (leComplexe.entreeUsager(jArrive)) {
+
+
+
+
+					long millis = Instant.now().toEpochMilli();
+					SimpleDateFormat leJour = new SimpleDateFormat("ddMMyy");
+					String dateJour = leJour.format(millis);
+					System.out.println("le jour et l'année et le mois qu'on est:"+dateJour+"");
+					SimpleDateFormat lHeure = new SimpleDateFormat("HHmm");
+					String dateHeure = lHeure.format(millis);
+
+					BarCode ean13 = new BarCode();
+					if (jArrive.getNumeroArrivee()<10){
+						ean13.setCodeToEncode("0"+jArrive.getNumeroArrivee()+dateJour+dateHeure+"");
+					}else{
+						ean13.setCodeToEncode(""+jArrive.getNumeroArrivee()+"0000000000");
+					}
+					ean13.setSymbology(IBarCode.EAN13);
+					ean13.setX(2);
+					ean13.setY(50);
+					ean13.setRightMargin(0);
+					ean13.setLeftMargin(0);
+					ean13.setTopMargin(0);
+					ean13.setBottomMargin(0);
+					try
+					{
+						// choisir le répertoire et le nom de l'image ainsi que son format
+						ean13.draw("/home/kerherve/Bureau/connard.png");
+
+					}
+					catch (Exception e) {
+						e.printStackTrace();
+					}
 					System.out.println(jArrive.afficheBillet());
 				}
 			}
@@ -34,6 +73,19 @@ public class RunComplexe {
 			System.out.print(leComplexe.lesInfos());
 			repAutre = Character.toUpperCase(javax.swing.JOptionPane.showInputDialog(AUTRE).charAt(0));
 		}
+
+
+
+
+
+
+
 		System.exit(0);
+
+
+
+
+
+
 	}
 }
