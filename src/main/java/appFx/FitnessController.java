@@ -16,15 +16,20 @@ import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 
 public class FitnessController implements Initializable {
+    private Arrivee arrivee;
 
+    @FXML
+    private Button retour;
     @FXML
     private ImageView fitnessImageView;
     @FXML
@@ -42,8 +47,7 @@ public class FitnessController implements Initializable {
     @FXML
     private TextField TAUX_OCCUPE;
     @FXML
-    private Button retour;
-
+    private Button confirmer;
 
 
     @Override
@@ -56,74 +60,46 @@ public class FitnessController implements Initializable {
         Image fitnessImage1 = new Image(fitnessFile1.toURI().toString());
         fitnessImageView1.setImage(fitnessImage1);
 
-        getNUM_BILLET();
-        getDATE();
-        getHEURE();
-        getNbPlacesRestantesFit();
-        getPLACE_OCCUPE();
-        getTAUX_OCCUPE();
+
+        arrivee = RunTime.getCurrentComplexe().entreeUsager('F');
+
+        Date date = new Date(arrivee.getHoraireArrivee());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat heureFormat = new SimpleDateFormat("HH:mm");
+
+
+
+        PLACE_LIBRE.setText(String.format("%d",RunTime.getCurrentComplexe().getNbPlacesRestantesFit()));
+        PLACE_OCCUPE.setText(String.format("%d",RunTime.getCurrentComplexe().getNbPlacesOccupeesFit()));
+        TAUX_OCCUPE.setText(String.format("%.0f%%",RunTime.getCurrentComplexe().etatFit()*100));
+        NUM_BILLET.setText(String.format("%d",arrivee.getNumeroArrivee()));
+        DATE.setText(dateFormat.format(date));
+        HEURE.setText(heureFormat.format(date));
+
 
     }
 
-
-    Arrivee arrivee = new Arrivee(null,'F');
-    Complexe complexe = new Complexe(5,4,"Cfun");
-
-
-
-    public TextField getNUM_BILLET() {
-
-        arrivee.getNumeroArrivee();
-        int total = arrivee.getNumeroArrivee()+1;
-        NUM_BILLET.setText(""+total+"");
-        return NUM_BILLET;
-    }
-
-    public TextField getDATE() {
-        LocalDate date = LocalDate.now();
-        DATE.setText(""+date+"");
-        return DATE ;
-    }
-
-    public TextField getHEURE() {
-        Format f = new SimpleDateFormat("HH.mm.ss");
-        String strResult = f.format(new Date());
-        HEURE.setText(""+strResult+"");
-        return HEURE;
-    }
-    public TextField getNbPlacesRestantesFit(){
-        int nombrePlaceDispo = complexe.getNbPlacesRestantesFit();
-        PLACE_LIBRE.setText(""+nombrePlaceDispo+"");
-        return PLACE_LIBRE;
-    }
-
-    public TextField getPLACE_OCCUPE(){
-        int nombrePlaceOccupe = complexe.getNbPlacesOccupeesFit();
-        PLACE_OCCUPE.setText(""+nombrePlaceOccupe+"");
-        return PLACE_OCCUPE;
-    }
-
-    public void retourLogin(){
-        try {
-            Stage stage = (Stage) retour.getScene().getWindow();
-            stage.close();
-            URL url = new File("src/main/resources/app/choixSport.fxml").toURI().toURL();
-            Parent root = FXMLLoader.load(url);
-            Stage registerStage = new Stage();
-            registerStage.initStyle(StageStyle.UNDECORATED);
-            registerStage.setScene(new Scene(root,600,400));
-            registerStage.show();
-
+    public void confirmer(){
+        System.out.println(NUM_BILLET.getText()+ " Fitness");
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/resources/app/choixSport.fxml"));
+            Stage window = (Stage) confirmer.getScene().getWindow();
+            window.setScene(new Scene(root,600,400));
         }catch (Exception e){
             e.printStackTrace();
             e.getCause();
         }
     }
-    public TextField getTAUX_OCCUPE(){
-        double TauxOccupe = complexe.etatMuscu();
-        TAUX_OCCUPE.setText(""+TauxOccupe+"");
-        return TAUX_OCCUPE;
+
+    public void retour(){
+            RunTime.getCurrentComplexe().sortieUsager(arrivee);
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/resources/app/choixSport.fxml"));
+            Stage window = (Stage) retour.getScene().getWindow();
+            window.setScene(new Scene(root,600,400));
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
     }
-
-
 }

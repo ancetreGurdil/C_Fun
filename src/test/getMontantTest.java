@@ -13,7 +13,7 @@ public class getMontantTest {
     @Before
     public void init(){
         // Todo: créer un fake complexe
-        complexe = null;
+        complexe = new Complexe(1,1,"");
         arrivee = new Arrivee(complexe,'M');
     }
 

@@ -34,6 +34,7 @@ public class Arrivee {
 		this.choixSport = choixSport;
 		this.complexe = complexe;
 		this.horaireDepart = Invalid;
+		this.numeroArrivee = complexe.generateNumeroArrivee();
 	}
 
 	public String afficheBillet() {
@@ -91,34 +92,46 @@ public class Arrivee {
 		double cout = 0;
 
 		if (horaireDepart != Invalid) {
-			// on passe des ms en mn
-			long duree = (horaireDepart - horaireArrivee)/(1000 * 60);
-			//
-			if (duree <= 30 && duree > 15) {
-				cout = 0.5;
-			}
+			long nbQuart = getCompterQuartHeure();
 
-			if (duree > 30 && duree <=60) {
+			if (nbQuart <= 1){
+				cout = 0;
+			}else if (nbQuart <= 2){
+				cout =0.5;
+			}else if (nbQuart <= 4){
 				cout = 1;
+			}else {
+				cout = 1+(nbQuart - 4)*0.5;
 			}
 
-			if (duree >60){
-				// cout fixe d'une heure
-				cout = 1;
-				duree -= 60;
-				// + tous les 1/4 h commencés
-				long nbquarts, reste;
-				nbquarts = duree / 15;
-
-				if (nbquarts * 15 != duree){
-					nbquarts++;
-				}
-				cout += nbquarts * 0.5;
-			}
 		}
 		return cout;
 	}
 
+	public long getDureeEnMilliseconde(){
+		if (horaireArrivee == Invalid || horaireDepart == Invalid){
+			return Invalid;
+		}
+		return horaireDepart - horaireArrivee;
+	}
+
+	public long getDureeEnMinute(){
+		if (horaireArrivee == Invalid || horaireDepart == Invalid){
+			return Invalid;
+		}
+		return getDureeEnMilliseconde()/60_000;
+	}
+
+	public long getCompterQuartHeure(){
+		if (horaireArrivee == Invalid || horaireDepart == Invalid){
+			return 0;
+		}
+		long NbQuart = getDureeEnMinute()/15;
+		if (NbQuart * 15 != getDureeEnMinute()){
+			NbQuart++;
+		}
+		return NbQuart;
+	}
 
 
 	public Complexe getComplexe() {

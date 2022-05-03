@@ -1,11 +1,15 @@
 package appFx;
 
+import app.Arrivee;
+import app.Complexe;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -16,81 +20,74 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ChoixSportController implements Initializable {
-	
-	@FXML
+
+    @FXML
     private Button muscu;
     @FXML
     private Button fitness;
     @FXML
+    private Button retour;
+    @FXML
     private ImageView altereImageView;
     @FXML
     private ImageView fitnessImageView;
-
     @FXML
-    private Button retour;
+    private Label musculationState;
+    @FXML
+    private Label fitnessState;
+
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        File altereFile = new File("src/main/resources/app/altere.png");
-        Image altereImage = new Image(altereFile.toURI().toString());
-        altereImageView.setImage(altereImage);
 
-        File fitnessFile = new File("src/main/resources/app/fitness.png");
-        Image fitnessImage = new Image(fitnessFile.toURI().toString());
-        fitnessImageView.setImage(fitnessImage);
+        if(RunTime.getCurrentComplexe().getNbPlacesRestantesFit() == 0){
+            fitness.setDisable(true);
+        }
+        if(RunTime.getCurrentComplexe().getNbPlacesRestantesMuscu() == 0){
+            muscu.setDisable(true);
+        }
+
+        musculationState.setText(String.format("Place disponible : %d/%d (%.0f%%)",RunTime.getCurrentComplexe().getNbPlacesRestantesMuscu(),
+                RunTime.getCurrentComplexe().getNbTotalPlacesMuscu(),
+                RunTime.getCurrentComplexe().etatMuscu()*100));
+        fitnessState.setText(String.format("Place disponible : %d/%d (%.0f%%)",RunTime.getCurrentComplexe().getNbPlacesRestantesFit(),
+                RunTime.getCurrentComplexe().getNbTotalPlacesFit(),
+                RunTime.getCurrentComplexe().etatFit()*100));
     }
     
     public void MusculationController(){
         try{
-            Stage stage = (Stage) muscu.getScene().getWindow();
-            stage.close();
-            URL url = new File("src/main/resources/app/musculation.fxml").toURI().toURL();
-            Parent root = FXMLLoader.load(url);
-            Stage registerStage = new Stage();
-            registerStage.initStyle(StageStyle.UNDECORATED);
-            registerStage.setScene(new Scene(root,600,400));
-            registerStage.show();
-
-
+            Parent root = FXMLLoader.load(ChoixSportController.class.getResource("/resources/app/musculation.fxml"));
+            Stage window = (Stage) retour.getScene().getWindow();
+            window.setScene(new Scene(root,600,400));
         }catch (Exception e){
             e.printStackTrace();
             e.getCause();
         }
     }
 
-    public void retourLogin(){
-        try {
-            Stage stage = (Stage) retour.getScene().getWindow();
-            stage.close();
-            URL url = new File("src/main/resources/app/accueil.fxml").toURI().toURL();
-            Parent root = FXMLLoader.load(url);
-            Stage registerStage = new Stage();
-            registerStage.initStyle(StageStyle.UNDECORATED);
-            registerStage.setScene(new Scene(root,600,400));
-            registerStage.show();
-
+    public void retourEntreeSortie(){
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/resources/app/entreeSortie.fxml"));
+            Stage window = (Stage) fitness.getScene().getWindow();
+            window.setScene(new Scene(root,600,400));
         }catch (Exception e){
             e.printStackTrace();
             e.getCause();
         }
+
     }
     public void goOnFitness(){
         try{
-            Stage stage = (Stage) fitness.getScene().getWindow();
-            stage.close();
-            URL url = new File("src/main/resources/app/fitness.fxml").toURI().toURL();
-            Parent root = FXMLLoader.load(url);
-            Stage registerStage = new Stage();
-            registerStage.initStyle(StageStyle.UNDECORATED);
-            registerStage.setScene(new Scene(root,600,400));
-            registerStage.show();
-
-
+            Parent root = FXMLLoader.load(ChoixSportController.class.getResource("/resources/app/fitness.fxml"));
+            Stage window = (Stage) retour.getScene().getWindow();
+            window.setScene(new Scene(root,600,400));
         }catch (Exception e){
             e.printStackTrace();
             e.getCause();
         }
     }
+
 
 }

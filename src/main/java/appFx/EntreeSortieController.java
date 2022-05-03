@@ -1,5 +1,6 @@
 package appFx;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,12 +17,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EntreeSortieController implements Initializable {
+    public static String choixEntreeSortie;
     @FXML
     private ImageView entreeImageView;
     @FXML
     private ImageView sortieImageView;
     @FXML
-    private Button retour;
+    private Button entree,sortie,retour;
 
 
     @Override
@@ -33,40 +35,42 @@ public class EntreeSortieController implements Initializable {
         File sortieFile = new File("src/main/resources/app/sortie.png");
         Image sortieImage = new Image(sortieFile.toURI().toString());
         sortieImageView.setImage(sortieImage);
-    }
 
-    public void retourLogin(){
+    }
+    public void annulation(){
         try {
             Stage stage = (Stage) retour.getScene().getWindow();
             stage.close();
-            URL url = new File("src/main/resources/app/accueil.fxml").toURI().toURL();
-            Parent root = FXMLLoader.load(url);
-            Stage registerStage = new Stage();
-            registerStage.initStyle(StageStyle.UNDECORATED);
-            registerStage.setScene(new Scene(root,600,400));
-            registerStage.show();
-
         }catch (Exception e){
             e.printStackTrace();
             e.getCause();
         }
     }
 
-    public void choixSport(){
+    @FXML public void choixSport(){
         try{
-            Stage stage = (Stage) retour.getScene().getWindow();
-            stage.close();
-            URL url = new File("src/main/resources/app/choixSport.fxml").toURI().toURL();
-            Parent root = FXMLLoader.load(url);
-            Stage registerStage = new Stage();
-            registerStage.initStyle(StageStyle.UNDECORATED);
-            registerStage.setScene(new Scene(root,600,400));
-            registerStage.show();
-
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/app/choixSport.fxml"));
+            Parent root = loader.load();
+            ChoixSportController controller = loader.getController();
+            Stage window = (Stage) entree.getScene().getWindow();
+            window.setScene(new Scene(root,600,400));
         }catch (Exception e){
             e.printStackTrace();
             e.getCause();
         }
     }
+
+    @FXML public void sortie(){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/app/sortie.fxml"));
+            Parent root = loader.load();
+            ExitController controller = loader.getController();
+            Stage window = (Stage) entree.getScene().getWindow();
+            window.setScene(new Scene(root,600,400));
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+
 }

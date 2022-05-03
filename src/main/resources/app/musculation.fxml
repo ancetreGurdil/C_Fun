@@ -65,7 +65,6 @@
       <TextField fx:id="PLACE_LIBRE" alignment="CENTER" editable="false" layoutX="290.0" layoutY="214.0" prefHeight="25.0" prefWidth="162.0" />
       <TextField fx:id="PLACE_OCCUPE" alignment="CENTER" editable="false" layoutX="290.0" layoutY="256.0" prefHeight="25.0" prefWidth="162.0" />
       <TextField fx:id="TAUX_OCCUPE" alignment="CENTER" editable="false" layoutX="253.0" layoutY="300.0" prefHeight="25.0" prefWidth="101.0" />
-      <Button fx:id="retour" layoutX="343.0" layoutY="354.0" mnemonicParsing="false" onAction="#retourMenu" prefHeight="24.0" prefWidth="219.0" style="-fx-background-color: #eb9d00;" text="Retour" />
-      <Button fx:id="confirmer" layoutX="58.0" layoutY="354.0" mnemonicParsing="false" onAction="#Confirmation" prefHeight="24.0" prefWidth="219.0" style="-fx-background-color: #eb9d00;" text="Confirmer" />
+      <Button fx:id="confirmer" layoutX="206.0" layoutY="351.0" mnemonicParsing="false" onAction="#confirmation" prefHeight="24.0" prefWidth="219.0" style="-fx-background-color: #eb9d00;" text="Confirmer" />
    </children>
 </AnchorPane>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #434B4D;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appFx.ExitController">
+   <children>
+      <AnchorPane layoutX="123.0" layoutY="132.0" prefHeight="175.0" prefWidth="354.0" style="-fx-background-color: #eb9d00;">
+         <children>
+            <TextField fx:id="billet" alignment="CENTER" layoutX="152.0" layoutY="76.0" prefHeight="24.0" prefWidth="134.0" />
+            <Label layoutX="37.0" layoutY="76.0" prefHeight="24.0" prefWidth="106.0" text="N° Billet : ">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="65.0" prefWidth="600.0" style="-fx-background-color: eb9d00;">
+         <children>
+            <Label alignment="CENTER" layoutX="75.0" layoutY="10.0" prefHeight="16.0" prefWidth="450.0" text="Sortie" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="33.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="altereImageView" fitHeight="60.0" fitWidth="70.0" layoutX="55.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@sortie.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="altereImageView1" fitHeight="60.0" fitWidth="70.0" layoutX="480.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@sortie.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Button fx:id="confirmer" alignment="CENTER" contentDisplay="CENTER" layoutX="60.0" layoutY="346.0" mnemonicParsing="false" onAction="#confirmationSortieClient" prefHeight="24.0" prefWidth="228.0" style="-fx-background-color: #eb9d00;" text="Confirmer" />
+      <Button fx:id="retour" alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="346.0" mnemonicParsing="false" onAction="#retourEntreeSortie" prefHeight="24.0" prefWidth="228.0" style="-fx-background-color: #eb9d00;" text="retour" />
+      <Label fx:id="sortieLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="166.0" layoutY="316.0" prefHeight="16.0" prefWidth="250.0" text="Ce numéro de billet n'existe pas" textAlignment="CENTER" textFill="#434b4d" />
+   </children>
+</AnchorPane>

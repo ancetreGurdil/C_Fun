@@ -8,21 +8,11 @@ import java.util.Date;
 import java.util.List;
 
 public class Complexe {
-	private static int numeroActuel = 0;
 
-	public static int getNumeroActuel() {
-		return numeroActuel;
-	}
-
-	public static void setNumeroActuel() {
-		Complexe.numeroActuel = Complexe.getNumeroActuel() + 1;
-	}
+	//valeur arbitraire
+	private int arriveeSequence = 1;
 
 	private String nomComplexe;
-
-	public String getNomComplexe() {
-		return nomComplexe;
-	}
 
 	private int nbTotalPlacesFit;
 	private int nbTotalPlacesMuscu;
@@ -32,40 +22,44 @@ public class Complexe {
 
 	List<Arrivee> lesArrivees = new ArrayList<Arrivee>();
 
-	public boolean entreeUsager(final Arrivee uneArrivee) {
-		boolean ok;
-		char choix;
+	public String getNomComplexe() {
+		return nomComplexe;
+	}
+	public Arrivee entreeUsager(char choixSport) {
 
-		ok = false;
-		choix = uneArrivee.getChoixSport();
-		if (choix == 'F') {
-			if (this.etatFit() != 1) {
-				Complexe.setNumeroActuel();
-				uneArrivee.setNumeroArrivee(Complexe.getNumeroActuel());
-				lesArrivees.add(uneArrivee);
+		if (choixSport == 'F') {
+			if (this.etatFit() < 1) {
+				Arrivee arrivee = new Arrivee(this,choixSport);
+				lesArrivees.add(arrivee);
 				this.nouvelUsagerFitness();
-				ok = true;
+				return arrivee;
 			}
 		} else {
-			if (this.etatMuscu() != 1.0) {
-				Complexe.setNumeroActuel();
-				uneArrivee.setNumeroArrivee(Complexe.getNumeroActuel());
-				lesArrivees.add(uneArrivee);
+			if (this.etatMuscu() < 1.0) {
+				Arrivee arrivee = new Arrivee(this,choixSport);
+				lesArrivees.add(arrivee);
 				this.nouvelUsagerMusculation();
-				ok = true;
+				return arrivee;
 			}
 		}
-		return ok;
+		return null;
 	}
 
-	public Arrivee sortieUsager(final int entree) {
-		Arrivee leDepart = recherche(entree);
-		if (leDepart.getChoixSport() == 'F') {
-			this.oterUsagerFitness();
-		} else {
-			this.oterUsagerMusculation();
+	public Arrivee sortieUsager(final int numeroArrivee) {
+		Arrivee leDepart = getArriveeByNumero(numeroArrivee);
+		return sortieUsager(leDepart);
+	}
+	public Arrivee sortieUsager(Arrivee arrivee){
+		if (lesArrivees.remove(arrivee)){
+			arrivee.setHoraireDepart(Calendar.getInstance().getTimeInMillis());
+			if (arrivee.getChoixSport() == 'F') {
+				this.oterUsagerFitness();
+			} else {
+				this.oterUsagerMusculation();
+			}
+			return arrivee;
 		}
-		return leDepart;
+		return null;
 	}
 
 	public Complexe(final int nbTotalPlacesMuscu, final int nbTotalPlacesFit,
@@ -125,6 +119,9 @@ public class Complexe {
 		return leDoc;
 	}
 
+	public int generateNumeroArrivee(){
+		return arriveeSequence++;
+	}
 	public int getNbPlacesRestantesFit() {
 		return this.nbTotalPlacesFit - (this.nbPlacesOccupeesFit);
 	}
@@ -157,6 +154,13 @@ public class Complexe {
 		nbPlacesOccupeesMuscu--;
 	}
 
+	public int getNbTotalPlacesFit(){
+		return nbTotalPlacesFit;
+	}
+	public int getNbTotalPlacesMuscu(){
+		return nbTotalPlacesMuscu;
+	}
+
 	private String couleurFit() {
 		ChoixCouleur choixCouleur = new ChoixCouleur(this.etatFit());
 		return choixCouleur.getCouleur().toString();
@@ -167,11 +171,24 @@ public class Complexe {
 				/ this.nbTotalPlacesMuscu;
 	}
 
-	private Arrivee recherche(int num) {
+	public Arrivee recherche(int num) {
 		int i = 0;
 		Arrivee courant = lesArrivees.get(i);
 		while (courant.getNumeroArrivee() != num)
 			courant = lesArrivees.get(++i);
 		return courant;
+	}
+
+	public Arrivee getArriveeByNumero(int numeroArrivee){
+		for (Arrivee arrivee:lesArrivees){
+			if (arrivee.getNumeroArrivee() == numeroArrivee){
+				return arrivee;
+			}
+		}
+		return null;
+	}
+
+	public List<Arrivee> getLesArrivees() {
+		return lesArrivees;
 	}
 }

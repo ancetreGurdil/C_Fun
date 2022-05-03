@@ -28,12 +28,11 @@ public class  RunComplexe {
 			repType = Character.toUpperCase(javax.swing.JOptionPane.showInputDialog(TYPE).charAt(0));
 			if (repType == 'E') {
 				repChoix = Character.toUpperCase(javax.swing.JOptionPane.showInputDialog(CHOIX).charAt(0));
-				Arrivee jArrive = new Arrivee(leComplexe, repChoix);
-				if (leComplexe.entreeUsager(jArrive)) {
+				Arrivee jArrive = leComplexe.entreeUsager(repChoix);
 
 
 
-
+				if (jArrive != null){
 					long millis = Instant.now().toEpochMilli();
 					SimpleDateFormat leJour = new SimpleDateFormat("ddMMyy");
 					String dateJour = leJour.format(millis);
@@ -73,19 +72,6 @@ public class  RunComplexe {
 			System.out.print(leComplexe.lesInfos());
 			repAutre = Character.toUpperCase(javax.swing.JOptionPane.showInputDialog(AUTRE).charAt(0));
 		}
-
-
-
-
-
-
-
 		System.exit(0);
-
-
-
-
-
-
 	}
 }

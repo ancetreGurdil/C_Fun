@@ -24,6 +24,8 @@ import app.Arrivee;
 import app.Complexe;
 
 public class MusculationController implements Initializable {
+
+    private Arrivee arrivee;
 	
 	@FXML
     private ImageView altereImageView;
@@ -40,6 +42,8 @@ public class MusculationController implements Initializable {
 	@FXML
     private TextField TAUX_OCCUPE;
     @FXML
+    private Button confirmer;
+    @FXML
     private Button retour;
 
 
@@ -47,86 +51,45 @@ public class MusculationController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle){
         File altereFile = new File("src/main/resources/app/altere.png");
         Image altereImage = new Image(altereFile.toURI().toString());
-        
-        getNUM_BILLET();
-        getDATE();
-        getHEURE();
-        getNbPlacesRestantesFit();
-        getPLACE_OCCUPE();
-        getTAUX_OCCUPE();
+
+        arrivee = RunTime.getCurrentComplexe().entreeUsager('M');
+
+        Date date = new Date(arrivee.getHoraireArrivee());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat heureFormat = new SimpleDateFormat("HH:mm");
+
+
+
+        PLACE_LIBRE.setText(String.format("%d",RunTime.getCurrentComplexe().getNbPlacesRestantesMuscu()));
+        PLACE_OCCUPE.setText(String.format("%d",RunTime.getCurrentComplexe().getNbPlacesOccupeesMuscu()));
+        TAUX_OCCUPE.setText(String.format("%.0f%%",RunTime.getCurrentComplexe().etatMuscu()*100));
+        NUM_BILLET.setText(String.format("%d",arrivee.getNumeroArrivee()));
+        DATE.setText(dateFormat.format(date));
+        HEURE.setText(heureFormat.format(date));
     }
     
-    public void retourMenu(){
-        try {
-            Stage stage = (Stage) retour.getScene().getWindow();
-            stage.close();
-            URL url = new File("src/main/resources/app/choixSport.fxml").toURI().toURL();
-            Parent root = FXMLLoader.load(url);
-            Stage registerStage = new Stage();
-            registerStage.initStyle(StageStyle.UNDECORATED);
-            registerStage.setScene(new Scene(root,600,400));
-            registerStage.show();
 
+    public void confirmation(){
+        System.out.println(NUM_BILLET.getText()+" Musculation");
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/resources/app/choixSport.fxml"));
+            Stage window = (Stage) confirmer.getScene().getWindow();
+            window.setScene(new Scene(root,600,400));
         }catch (Exception e){
             e.printStackTrace();
             e.getCause();
         }
     }
-    
-    public void Confirmation(){
-        try {
-            Stage stage = (Stage) retour.getScene().getWindow();
-            stage.close();
-            URL url = new File("src/main/resources/app/choixSport.fxml").toURI().toURL();
-            Parent root = FXMLLoader.load(url);
-            Stage registerStage = new Stage();
-            registerStage.initStyle(StageStyle.UNDECORATED);
-            registerStage.setScene(new Scene(root,600,400));
-            registerStage.show();
 
+    public void retour(){
+            RunTime.getCurrentComplexe().sortieUsager(arrivee);
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/resources/app/choixSport.fxml"));
+            Stage window = (Stage) retour.getScene().getWindow();
+            window.setScene(new Scene(root,600,400));
         }catch (Exception e){
             e.printStackTrace();
             e.getCause();
         }
-    }
-    Arrivee arrivee = new Arrivee(null,'F');
-    Complexe complexe = new Complexe(5,4,"Cfun");
-    
-    public TextField getNUM_BILLET() {
-
-        arrivee.getNumeroArrivee();
-        int total = arrivee.getNumeroArrivee()+1;
-        NUM_BILLET.setText(""+total+"");
-        return NUM_BILLET;
-    }
-
-    public TextField getDATE() {
-        LocalDate date = LocalDate.now();
-        DATE.setText(""+date+"");
-        return DATE ;
-    }
-
-    public TextField getHEURE() {
-        Format f = new SimpleDateFormat("HH.mm.ss");
-        String strResult = f.format(new Date());
-        HEURE.setText(""+strResult+"");
-        return HEURE;
-    }
-    public TextField getNbPlacesRestantesFit(){
-
-        int nombrePlaceDispo = complexe.getNbPlacesRestantesMuscu();
-        PLACE_LIBRE.setText(""+nombrePlaceDispo+"");
-        return PLACE_LIBRE;
-    }
-
-    public TextField getPLACE_OCCUPE(){
-        int nombrePlaceOccupe = complexe.getNbPlacesOccupeesMuscu();
-        PLACE_OCCUPE.setText(""+nombrePlaceOccupe+"");
-        return PLACE_OCCUPE;
-    }
-    public TextField getTAUX_OCCUPE(){
-        double TauxOccupe = complexe.etatMuscu();
-        TAUX_OCCUPE.setText(""+TauxOccupe+"");
-        return TAUX_OCCUPE;
     }
 }

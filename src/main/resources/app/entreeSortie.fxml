@@ -42,6 +42,6 @@
                 <Button fx:id="fitness" mnemonicParsing="false" opacity="0.0" prefHeight="200.0" prefWidth="232.0" text="Button" />
             </children>
         </AnchorPane>
-        <Button fx:id="retour" layoutX="174.0" layoutY="350.0" mnemonicParsing="false" onAction="#retourLogin" prefHeight="24.0" prefWidth="241.0" style="-fx-background-color: Eb9d00;" text="Retour" />
+        <Button fx:id="retour" layoutX="174.0" layoutY="350.0" mnemonicParsing="false" onAction="#annulation" prefHeight="24.0" prefWidth="241.0" style="-fx-background-color: Eb9d00;" text="Retour" />
     </children>
 </AnchorPane>
