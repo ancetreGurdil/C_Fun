@@ -67,6 +67,17 @@ public class ChoixSportController implements Initializable {
         }
     }
 
+    public void goOnFitness(){
+        try{
+            Parent root = FXMLLoader.load(ChoixSportController.class.getResource("/resources/app/fitness.fxml"));
+            Stage window = (Stage) retour.getScene().getWindow();
+            window.setScene(new Scene(root,600,400));
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+
     public void retourEntreeSortie(){
         try{
             Parent root = FXMLLoader.load(getClass().getResource("/resources/app/entreeSortie.fxml"));
@@ -78,16 +89,7 @@ public class ChoixSportController implements Initializable {
         }
 
     }
-    public void goOnFitness(){
-        try{
-            Parent root = FXMLLoader.load(ChoixSportController.class.getResource("/resources/app/fitness.fxml"));
-            Stage window = (Stage) retour.getScene().getWindow();
-            window.setScene(new Scene(root,600,400));
-        }catch (Exception e){
-            e.printStackTrace();
-            e.getCause();
-        }
-    }
+
 
 
 }

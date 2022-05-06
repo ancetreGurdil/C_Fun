@@ -49,6 +49,7 @@ public class Complexe {
 		Arrivee leDepart = getArriveeByNumero(numeroArrivee);
 		return sortieUsager(leDepart);
 	}
+
 	public Arrivee sortieUsager(Arrivee arrivee){
 		if (lesArrivees.remove(arrivee)){
 			arrivee.setHoraireDepart(Calendar.getInstance().getTimeInMillis());

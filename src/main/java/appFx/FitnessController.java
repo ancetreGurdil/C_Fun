@@ -2,6 +2,8 @@ package appFx;
 
 import app.Arrivee;
 import app.Complexe;
+import com.keepautomation.barcode.BarCode;
+import com.keepautomation.barcode.IBarCode;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,6 +21,7 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
@@ -49,6 +52,12 @@ public class FitnessController implements Initializable {
     @FXML
     private Button confirmer;
 
+
+    long millis = Instant.now().toEpochMilli();
+    SimpleDateFormat leJour = new SimpleDateFormat("ddMMyy");
+    String dateJour = leJour.format(millis);
+    SimpleDateFormat lHeure = new SimpleDateFormat("HHmm");
+    String dateHeure = lHeure.format(millis);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
@@ -81,6 +90,29 @@ public class FitnessController implements Initializable {
 
     public void confirmer(){
         System.out.println(NUM_BILLET.getText()+ " Fitness");
+
+        BarCode ean13 = new BarCode();
+        if (arrivee.getNumeroArrivee()<10){
+            ean13.setCodeToEncode("0"+arrivee.getNumeroArrivee()+dateJour+dateHeure);
+        }else{
+            ean13.setCodeToEncode(""+arrivee.getNumeroArrivee()+dateJour+dateHeure);
+        }
+        ean13.setSymbology(IBarCode.EAN13);
+        ean13.setX(2);
+        ean13.setY(50);
+        ean13.setRightMargin(0);
+        ean13.setLeftMargin(0);
+        ean13.setTopMargin(0);
+        ean13.setBottomMargin(0);
+        try
+        {
+            // choisir le répertoire et le nom de l'image ainsi que son format
+            ean13.draw("/home/kerherve/Bureau/fitness_"+arrivee.getNumeroArrivee()+".png");
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         try{
             Parent root = FXMLLoader.load(getClass().getResource("/resources/app/choixSport.fxml"));
             Stage window = (Stage) confirmer.getScene().getWindow();
